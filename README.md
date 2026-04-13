@@ -69,7 +69,6 @@ After GitHub Pages republishes, the story will load from Supabase and new lines 
 
 - The one-line lock is still per browser/device because there is no user authentication.
 - `standalone.html` remains a drag-and-drop local file version.
-
 ## Files
 
 - `index.html` is the deployed entry page.
