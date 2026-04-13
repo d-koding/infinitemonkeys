@@ -6,12 +6,10 @@ Minimal static story app for GitHub Pages with shared persistence via Supabase.
 
 1. Push this repo to GitHub.
 2. Open `Settings` -> `Pages`.
-3. Under `Build and deployment`, choose `Deploy from a branch`.
-4. Select the branch you want to publish from.
-5. Select the `/ (root)` folder.
-6. Save.
+3. Under `Build and deployment`, choose `GitHub Actions`.
+4. Push to `main` or run the workflow manually from the `Actions` tab.
 
-GitHub Pages will serve the site from the root `index.html`.
+GitHub Pages will deploy the root site using `.github/workflows/static.yml`.
 
 ## Turn On Shared Persistence
 
@@ -50,7 +48,7 @@ Open `Project Settings` -> `API` in Supabase and copy:
 - Project URL
 - Project API key labeled `anon public`
 
-Paste them into [config.js](/Users/dylanoconnor/develop/infinitemonkeys/config.js):
+For local use, create your own untracked [config.js](/Users/dylanoconnor/develop/infinitemonkeys/config.js) from [config.example.js](/Users/dylanoconnor/develop/infinitemonkeys/config.example.js):
 
 ```js
 window.APP_CONFIG = {
@@ -59,7 +57,14 @@ window.APP_CONFIG = {
 };
 ```
 
-Then commit and push `config.js` along with the rest of the site.
+`config.js` is ignored by git, so your local copy will not be committed.
+
+For GitHub Pages deployment, add these repository secrets in GitHub:
+
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
+
+The GitHub Pages workflow generates `config.js` during deploy from those secrets.
 
 ### 3. Redeploy
 
@@ -67,12 +72,15 @@ After GitHub Pages republishes, the story will load from Supabase and new lines 
 
 ## Notes
 
+- The Supabase `anon` key is not a true secret in a browser app. It is safe to expose to clients, but you should never use your `service_role` key here.
 - The one-line lock is still per browser/device because there is no user authentication.
 - `standalone.html` remains a drag-and-drop local file version.
+
 ## Files
 
 - `index.html` is the deployed entry page.
 - `styles.css` and `app.js` are used by the deployed page.
-- `config.js` holds the public Supabase settings for the live site.
+- `config.example.js` is the template for local config.
+- `config.js` is generated locally or in GitHub Actions and is not committed.
 - `standalone.html` is the single-file version you can drag into a browser.
 - `.nojekyll` disables Jekyll processing so Pages serves the site as plain static files.
