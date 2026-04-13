@@ -6,9 +6,7 @@ const sentenceInput = document.getElementById("sentence-input");
 const storyText = document.getElementById("story-text");
 const statusMessage = document.getElementById("status-message");
 
-const seedStory = [
-  "",
-];
+const seedStory = [];
 
 function loadStory() {
   const saved = localStorage.getItem(STORY_KEY);
