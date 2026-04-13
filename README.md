@@ -46,14 +46,14 @@ with check (char_length(trim(text)) > 0);
 Open `Project Settings` -> `API` in Supabase and copy:
 
 - Project URL
-- Project API key labeled `anon public`
+- Publishable key
 
 For local use, create your own untracked [config.js](/Users/dylanoconnor/develop/infinitemonkeys/config.js) from [config.example.js](/Users/dylanoconnor/develop/infinitemonkeys/config.example.js):
 
 ```js
 window.APP_CONFIG = {
   supabaseUrl: "https://YOUR-PROJECT.supabase.co",
-  supabaseAnonKey: "YOUR_SUPABASE_ANON_KEY",
+  supabasePublishableKey: "YOUR_SUPABASE_PUBLISHABLE_KEY",
 };
 ```
 
@@ -62,7 +62,7 @@ window.APP_CONFIG = {
 For GitHub Pages deployment, add these repository secrets in GitHub:
 
 - `SUPABASE_URL`
-- `SUPABASE_ANON_KEY`
+- `SUPABASE_PUBLISHABLE_KEY`
 
 The GitHub Pages workflow generates `config.js` during deploy from those secrets.
 
@@ -72,7 +72,7 @@ After GitHub Pages republishes, the story will load from Supabase and new lines 
 
 ## Notes
 
-- The Supabase `anon` key is not a true secret in a browser app. It is safe to expose to clients, but you should never use your `service_role` key here.
+- The Supabase publishable key is not a true secret in a browser app. It is safe to expose to clients, but you should never use your `service_role` key here.
 - The one-line lock is still per browser/device because there is no user authentication.
 - `standalone.html` remains a drag-and-drop local file version.
 

@@ -8,13 +8,14 @@ const storyText = document.getElementById("story-text");
 const statusMessage = document.getElementById("status-message");
 
 const seedStory = [];
+const supabasePublicKey = APP_CONFIG.supabasePublishableKey || APP_CONFIG.supabaseAnonKey || "";
 const onlineStoryConfigured =
   typeof APP_CONFIG.supabaseUrl === "string" &&
-  typeof APP_CONFIG.supabaseAnonKey === "string" &&
+  typeof supabasePublicKey === "string" &&
   APP_CONFIG.supabaseUrl.length > 0 &&
-  APP_CONFIG.supabaseAnonKey.length > 0 &&
+  supabasePublicKey.length > 0 &&
   !APP_CONFIG.supabaseUrl.includes("YOUR_") &&
-  !APP_CONFIG.supabaseAnonKey.includes("YOUR_");
+  !supabasePublicKey.includes("YOUR_");
 
 let story = seedStory;
 
@@ -67,8 +68,8 @@ function focusInput() {
 
 function getSupabaseHeaders(extraHeaders = {}) {
   return {
-    apikey: APP_CONFIG.supabaseAnonKey,
-    Authorization: `Bearer ${APP_CONFIG.supabaseAnonKey}`,
+    apikey: supabasePublicKey,
+    Authorization: `Bearer ${supabasePublicKey}`,
     ...extraHeaders,
   };
 }
