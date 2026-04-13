@@ -7,9 +7,7 @@ const storyText = document.getElementById("story-text");
 const statusMessage = document.getElementById("status-message");
 
 const seedStory = [
-  "At dawn, the town discovered that every clock was running five minutes behind the birds.",
-  "Nobody panicked until the church bell rang before the rope had even been pulled.",
-  "By noon, strangers were finishing each other's thoughts as if the day had already happened once.",
+  "",
 ];
 
 function loadStory() {
